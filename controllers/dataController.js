@@ -30,7 +30,6 @@ const dataController = {
     },
     //Update
     update(req, res, next){
-        req.body.readyToEat = req.body.readyToEat === 'on'? true : false;
         Poke.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedPoke)=> {
             if(err){
                 res.status(400).send({
@@ -44,7 +43,6 @@ const dataController = {
     },
     //Create
     create(req, res, next){
-        req.body.readyToEat = req.body.readyToEat === 'on'? true : false;
         Poke.create(req.body, (err, createdPoke)=> {
             if(err){
                 res.status(400).send({
@@ -66,7 +64,7 @@ const dataController = {
                     output: 'Could not find a poke with that ID'
                 })
             } else {
-                res.locals.data.fruit = foundPoke
+                res.locals.data.poke = foundPoke
                 next()
             }
         })
